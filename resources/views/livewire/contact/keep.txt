@@ -1,0 +1,75 @@
+<div
+      class="col-span-2 sm:col-span-1">
+
+      {{-- <x-input.group
+        for="company"
+        label="Company"
+        :error="$errors->first('company_id')">
+        <x-input.select
+          wire:model="form.company_id"
+          placeholder="Pick contact's company"
+          id="company">
+          @foreach (App\Models\Company::get(['id', 'name']) as $value => $label)
+            <option value="{{ $value }}">
+              {{ $label }}
+            </option>
+          @endforeach
+        </x-input.select>
+      </x-input.group> --}}
+
+      <x-input-label
+        class="mb-1">
+        Company
+      </x-input-label>
+
+      <x-select-input
+        wire:model="form.company_id"
+        placeholder="Pick contact's company">
+        @foreach (App\Models\Company::get(['id', 'name']) as $value => $label)
+          <option value="{{ $value }}">
+            {{ $label }}
+          </option>
+        @endforeach
+      </x-select-input>
+
+      <x-input-error
+        :messages="$errors->first('form.company_id')"
+        class="mt-1" />
+
+    </div>
+
+    <section class="col-span-2 flex flex-col">
+
+        <x-super-select-input
+          :data="$contacts"
+          wire:model="contact"
+          placeholder="Pick a company" />
+
+
+      <x-phone-input
+        wire:model="phones" />
+
+      {{-- <x-input-error
+        :messages="$errors->get('form.phones')"
+        class="mt-1" /> --}}
+    </section>
+
+    <div class="col-span-2">
+
+
+      {{ $contact }}
+    </div>
+
+    {{--
+
+    <x-splade-wysiwyg
+      name="bio"
+      label="Notes"
+      class="col-span-2 sm:col-span-1"
+      placeholder="Brief notes about the contact"
+      jodit="{
+        showXPathInStatusbar: false,
+        buttons: ['bold', 'italic', 'print'],
+        readonly: false,
+        toolbarAdaptive: false,
+      }" /> --}}
